@@ -1,0 +1,61 @@
+{% extends 'admin/base_site.html' %} 
+{% block extrahead %}{{ block.super }}
+<script type="text/javascript" src="/static/js/jquery.min.js"></script>
+{{ media }}
+{% endblock %}
+{% block extrastyle %}{{ block.super }}<link rel="stylesheet" type="text/css" href="/site_media/admin/css/forms.css"/>{% endblock %}
+
+{% block coltype %}colM{% endblock %}
+
+{% block bodyclass %}{{ block.super }} change-form{% endblock %}
+
+{% block content %}
+<h1>批量更新二维码</h1>
+<form id="upd_form" novalidate="" method="post" action="/pr/admin/update/" enctype="multipart/form-data">
+{% csrf_token %}
+<div>
+    <input type="hidden" name="qrcodes" value="{{qrcodes}}">
+    <fieldset>
+        <div class="form-row">
+            <div>
+                <label class="required" for="id_fcorp">企业:</label>
+                <select id="id_fcorp" name="fcorp">
+                <option value="">---------</option>
+                {% for c in corp %}
+                <option value="{{c.id}}">{{c.fcorpName}}</option>
+                {% endfor %}
+                </select>
+            </div>
+        </div>
+        <div class="form-row">
+            <div>
+                <label class="required" for="id_product">产品:</label>
+                <select id="id_product" name="fproduct">
+                <option value="">---------</option>
+                </select>
+            </div>
+        </div>
+    </fieldset>
+    <div class="submit-row">
+    <input class="default" type="submit" name="_save" value="保存">
+    </div>
+</div>
+</form>
+
+<script type="text/javascript">
+    $("#id_fcorp").change(function(){
+        $("#id_product").empty().append('<option value="">---------</option>');
+        $.ajax({
+            type:"get",
+            url:"/pr/admin/getproduct",
+            data:{"corpId":$("#id_fcorp").val()},
+            dataType:"json",
+            success:function(data){
+                for(var i in data){
+                    $("#id_product").append("<option value='"+data[i].pid+"'>"+data[i].pname+"</option>");
+                }
+            }
+        });
+    });
+</script>
+{% endblock%}

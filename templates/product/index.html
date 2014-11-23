@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width">
+<link rel="stylesheet" href="/static/js/jquery.mobile-1.4.5/jquery.mobile-1.4.5.min.css">
+<script src="/static/js/jquery.mobile-1.4.5/demos/js/jquery.min.js"></script>
+<script src="/static/js/jquery.mobile-1.4.5/jquery.mobile-1.4.5.min.js"></script>
+<style type="text/css">
+.ui-page-theme-a .ui-btn:hover, html .ui-bar-a .ui-btn:hover, html .ui-body-a .ui-btn:hover, html body .ui-group-theme-a .ui-btn:hover, html head+body .ui-btn.ui-btn-a:hover{background-color: #d3edfe;}
+.ui-page-theme-a .ui-btn, html .ui-bar-a .ui-btn, html .ui-body-a .ui-btn, html body .ui-group-theme-a .ui-btn, html head+body .ui-btn.ui-btn-a, .ui-page-theme-a .ui-btn:visited, html .ui-bar-a .ui-btn:visited, html .ui-body-a .ui-btn:visited, html body .ui-group-theme-a .ui-btn:visited, html head+body .ui-btn.ui-btn-a:visited{background-color: #c2e6fd;}
+.ui-page-theme-a .ui-btn.ui-btn-active, html .ui-bar-a .ui-btn.ui-btn-active, html .ui-body-a .ui-btn.ui-btn-active, html body .ui-group-theme-a .ui-btn.ui-btn-active, html head+body .ui-btn.ui-btn-a.ui-btn-active, .ui-page-theme-a .ui-checkbox-on:after, html .ui-bar-a .ui-checkbox-on:after, html .ui-body-a .ui-checkbox-on:after, html body .ui-group-theme-a .ui-checkbox-on:after, .ui-btn.ui-checkbox-on.ui-btn-a:after, .ui-page-theme-a .ui-flipswitch-active, html .ui-bar-a .ui-flipswitch-active, html .ui-body-a .ui-flipswitch-active, html body .ui-group-theme-a .ui-flipswitch-active, html body .ui-flipswitch.ui-bar-a.ui-flipswitch-active, .ui-page-theme-a .ui-slider-track .ui-btn-active, html .ui-bar-a .ui-slider-track .ui-btn-active, html .ui-body-a .ui-slider-track .ui-btn-active, html body .ui-group-theme-a .ui-slider-track .ui-btn-active, html body div.ui-slider-track.ui-body-a .ui-btn-active{background-color: #d3edfe;color: #000000;border-color: #d3edfe;}
+</style>
+</head>
+<body>
+
+<div style="background:#ECF6FD" data-role="page">
+{% if qrcode%}
+  <div data-position="fixed" data-role="header" style="background:#b5e2ff;">
+    <h1 style="text-shadow: 0 0px 0 #f3f3f3;">"防伪号"防伪中心</h1>
+    <div data-role="navbar">  
+        <ul>  
+            <li><a style="text-shadow: 0 0px 0 #f3f3f3;" onClick="chane('one')" class="ui-btn-active ui-state-persist" data-ajax="false">扫描结果</a></li>  
+            <!--<li><a onClick="chane('two')" data-ajax="false">产品信息</a></li>  --> 
+            <li><a style="text-shadow: 0 0px 0 #f3f3f3;" onClick="chane('three')" data-ajax="true">溯源信息</a></li>  
+            <!--<li><a onClick="chane('fo')" data-ajax="true">商家推荐</a></li>    --> 
+        </ul>  
+    </div><!-- /navbar -->  
+  </div>
+  
+  <div id="one" class="ui-body-d ui-content">
+		<div class="ui-listview ui-listview-inset ui-corner-all ui-shadow" style="float:left;color:red;font-size:26px;background:#ffffff;width:100%;margin-bottom:0px;" class="ui-li-static ui-body-a">
+			<div style="left:10px;margin-left:10px;margin-bottom:10px;margin-right:10px;margin-top:10px;">您查询的是《{{corp.fcorpName}}》的注册产品</b>
+			</div>
+        </div>
+    	<div style="margin-top:0px;" class=" ui-page-theme-a" role="main" data-theme="a" data-form="ui-page-theme-a">
+            <ul class="ui-listview ui-listview-inset ui-corner-all ui-shadow" data-inset="true" data-role="listview">
+                <li class="ui-li-static ui-body-a" data-theme="a" data-swatch="a" data-form="ui-body-a"><span style="float:left;">标签编号</span><span style="float:left;font-weight:bold;">{{qrcode.fqrcode}}</span></li>
+                <!-- <li class="ui-li-static ui-body-a" data-theme="a" data-swatch="a" data-form="ui-body-a"><span style="float:left;">二维码生成时间</span><span style="float:right;font-weight: bold;"></span></li> -->
+                {% if qrcode.fvolumeNo%}<li class="ui-li-static ui-body-a" data-theme="a" data-swatch="a" data-form="ui-body-a"><span style="float:left;">卷标号</span><span style="float:left;font-weight: bold;">{{qrcode.fvolumeNo}}
+                </span></li>
+                {% endif %}
+                {% if qrcode.fisBan%}<li class="ui-li-static ui-body-a" data-theme="a" data-swatch="a" data-form="ui-body-a"><span style="float:left;">是否冻结</span><span style="float:left;font-weight: bold;">{% if qrcode.fisBan == False %}否
+                {% else %}是
+                {% endif %}</span></li>
+                {% endif %}
+                <!-- <li class="ui-li-static ui-body-a" data-theme="a" data-swatch="a" data-form="ui-body-a"></li>
+                <li class="ui-li-static ui-body-a" data-theme="a" data-swatch="a" data-form="ui-body-a"></li>
+                <li class="ui-li-static ui-body-a" data-theme="a" data-swatch="a" data-form="ui-body-a"></li> -->
+            </ul>
+        </div>
+        <p></p>
+        <div class=" ui-page-theme-a" role="main" data-theme="a" data-form="ui-page-theme-a">
+            <ul class="ui-listview ui-listview-inset ui-corner-all ui-shadow" data-inset="true" data-role="listview">
+                <li class="ui-li-static ui-body-a" data-theme="a" data-swatch="a" data-form="ui-body-a"><span style="float:left;">查询次数</span><span style="float:right;font-weight: bold;">{{qrcode.fremark1}}</span></li>
+                <!-- <li class="ui-li-static ui-body-a" data-theme="a" data-swatch="a" data-form="ui-body-a"><span style="float:left;">上次查询地点</span><span style="float:right;font-weight: bold;">{{qrcode.fremark2}}</span></li> -->
+                <li class="ui-li-static ui-body-a" data-theme="a" data-swatch="a" data-form="ui-body-a"><span style="float:left;">本次查询时间</span><span style="float:right;font-weight: bold;">{{qrcode.fremark3|date:"Y-m-d H:i:s"}}</span></li>
+<!--<li class="ui-li-static ui-body-a" data-theme="a" data-swatch="a" data-form="ui-body-a"><span style="float:left;">本次查询时间</span><span style="float:right;font-weight: bold;">{{rightnow|date:"Y-m-d H:i:s"}}</span></li>-->
+            </ul>
+        </div>
+  	<img style="width:100%" src="http://114.215.130.186/{{product.fsmallPicUrl}}">
+  </div>
+
+	<div id="three" class="ui-body-d ui-content">
+        <div>
+            <div data-inset="true" data-role="listview" style="background:#FFF;height:auto;border-top:1px solid #cdcdcd;">
+                {% if product %}
+            	<div style="margin-left:15px;margin-right:15px;font-size:16px;line-height:50px;border-top:1px solid #cdcdcd;">
+                产品名:<b style="float:right;">{{product.fproductName}}</b><br>
+            	</div>
+                    {% if params %}
+                        {% for k,v in params.items %}
+            	<div style="margin-left:15px;margin-right:15px;font-size:16px;line-height:50px;border-top:1px solid #cdcdcd;">
+                {{k}}:<b style="float:right;">{{v}}</b><br>
+            	</div>
+                        {% endfor %}
+                    {% endif %}
+                    {% if product.fisoNo%}
+            	<div style="margin-left:15px;margin-right:15px;font-size:16px;line-height:50px;border-top:1px solid #cdcdcd;">
+                产品国家授权编号:<b style="float:right;">{{product.fisoNo}}</b><br>
+            	</div>
+                    {% endif %}
+                    {% if qrcode.fdate%}
+            	<div style="margin-left:15px;margin-right:15px;font-size:16px;line-height:50px;border-top:1px solid #cdcdcd;">
+                生产日期:<b style="float:right;">{{qrcode.fdate}}</b><br>
+            	</div>
+                    {% endif %}
+                {% else %}
+                <li class="ui-li-static ui-body-a" data-theme="a" data-swatch="a" data-form="ui-body-a"><b>暂无产品信息</b></li>
+                {% endif %}
+            </div>
+        </div>
+        <p></p>
+        <div>
+            <div data-inset="true" data-role="listview" style="background:#FFF;height:auto;border-top:1px solid #cdcdcd;">
+            {% if corp%}
+            	<div style="margin-left:15px;margin-right:15px;font-size:16px;line-height:50px;border-top:1px solid #cdcdcd;">
+                {% if corp.fcorpName%}生产企业:<b style="float:right;">{{corp.fcorpName}}</b><br>
+            	</div>
+                {% endif %}
+            	<div style="margin-left:15px;margin-right:15px;font-size:16px;line-height:50px;border-top:1px solid #cdcdcd;">
+                {% if corp.faddress%}公司地址:<b style="float:right;">{{corp.faddress}}</b><br>
+            	</div>
+                {% endif %}
+            	<div style="margin-left:15px;margin-right:15pxfont-size:16px;line-height:50px;border-top:1px solid #cdcdcd;">
+                {% if corp.fcontact%}联系方式:<b style="float:right;">{{corp.fcontact}}</b><br>
+            	</div>
+                {% endif %}
+            	<div style="margin-left:15px;margin-right:15px;font-size:16px;line-height:50px;border-top:1px solid #cdcdcd;">
+                {% if corp.fchargeMan%}负责人:<b style="float:right;">{{corp.fchargeMan}}</b><br>
+            	</div>
+                {% endif %}
+                <!-- <li class="ui-li-static ui-body-a" data-theme="a" data-swatch="a" data-form="ui-body-a"><span style="float:left;">负责人照片</span><span style="float:right;font-weight: bold;"><img style="width:100px;height: 100px" src="http://114.215.130.186/{{corp.fmanPicUrl}}"></span></li>
+                <li class="ui-li-static ui-body-a" data-theme="a" data-swatch="a" data-form="ui-body-a"><span style="float:left;">公司营业执照</span><span style="float:right;font-weight: bold;"><img style="width:100px;height: 100px" src="http://114.215.130.186/{{corp.fcorpPicUrl}}"></span></li>
+                <li class="ui-li-static ui-body-a" data-theme="a" data-swatch="a" data-form="ui-body-a"><span style="float:left;">公司授权资料</span><span style="float:right;font-weight: bold;"><img style="width:100px;height: 100px" src="http://114.215.130.186/{{corp.ffilePicUrls}}"></span></li> -->
+            {% else %}
+                <div class="ui-li-static ui-body-a" data-theme="a" data-swatch="a" data-form="ui-body-a"><b>暂无企业信息</b></div>
+            {% endif %}
+            </div>
+        </div>
+
+        <img style="width:100%" src="http://114.215.130.186/{{product.fsmallPicUrl}}">
+      </div>
+{% else %}
+
+        <div class="ui-corner-all custom-corners">
+          <div class="ui-body ui-body-a">
+            <p><span style="float:center;">鉴定失败，无此产品信息</span></p>
+
+          </div>
+        </div>
+{% endif %}</div>
+		{% if product %}
+        <div data-position="fixed" data-role="footer">
+            <div class="ui-navbar" data-role="navbar" role="navigation">
+                <ul class="ui-grid-b">
+                    <li class="ui-block-a">
+                    <a style="background:#b5e2ff;text-shadow: 0 0px 0 #f3f3f3;" target="_blank" href="{{product.fshopUrl}}">商城首页</a>
+                    </li>
+                    <li class="ui-block-b">
+                    <a style="background:#b5e2ff;text-shadow: 0 0px 0 #f3f3f3;" target="_blank" href="{{product.fbuyUrl}}">再次购买</a>
+                    </li>
+                    <li class="ui-block-c">
+                    <a style="background:#b5e2ff;text-shadow: 0 0px 0 #f3f3f3;" class="ui-btn" href="{{product.fmanualUrl}}">产品介绍</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        {% endif %}
+
+</div> 
+
+</body>
+<script>
+function chane(v){
+	$('#one').css('display','none')
+	$('#two').css('display','none')
+	$('#three').css('display','none')
+	$('#fo').css('display','none')
+	
+	$('#'+v).css('display','block')
+}
+chane('one')
+</script>
+</html>
+			
