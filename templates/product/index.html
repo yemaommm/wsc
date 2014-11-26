@@ -7,108 +7,92 @@
 <script src="/static/js/jquery.mobile-1.4.5/demos/js/jquery.min.js"></script>
 <script src="/static/js/jquery.mobile-1.4.5/jquery.mobile-1.4.5.min.js"></script>
 <style type="text/css">
-.ui-page-theme-a .ui-btn:hover, html .ui-bar-a .ui-btn:hover, html .ui-body-a .ui-btn:hover, html body .ui-group-theme-a .ui-btn:hover, html head+body .ui-btn.ui-btn-a:hover{background-color: #d3edfe;}
-.ui-page-theme-a .ui-btn, html .ui-bar-a .ui-btn, html .ui-body-a .ui-btn, html body .ui-group-theme-a .ui-btn, html head+body .ui-btn.ui-btn-a, .ui-page-theme-a .ui-btn:visited, html .ui-bar-a .ui-btn:visited, html .ui-body-a .ui-btn:visited, html body .ui-group-theme-a .ui-btn:visited, html head+body .ui-btn.ui-btn-a:visited{background-color: #c2e6fd;}
-.ui-page-theme-a .ui-btn.ui-btn-active, html .ui-bar-a .ui-btn.ui-btn-active, html .ui-body-a .ui-btn.ui-btn-active, html body .ui-group-theme-a .ui-btn.ui-btn-active, html head+body .ui-btn.ui-btn-a.ui-btn-active, .ui-page-theme-a .ui-checkbox-on:after, html .ui-bar-a .ui-checkbox-on:after, html .ui-body-a .ui-checkbox-on:after, html body .ui-group-theme-a .ui-checkbox-on:after, .ui-btn.ui-checkbox-on.ui-btn-a:after, .ui-page-theme-a .ui-flipswitch-active, html .ui-bar-a .ui-flipswitch-active, html .ui-body-a .ui-flipswitch-active, html body .ui-group-theme-a .ui-flipswitch-active, html body .ui-flipswitch.ui-bar-a.ui-flipswitch-active, .ui-page-theme-a .ui-slider-track .ui-btn-active, html .ui-bar-a .ui-slider-track .ui-btn-active, html .ui-body-a .ui-slider-track .ui-btn-active, html body .ui-group-theme-a .ui-slider-track .ui-btn-active, html body div.ui-slider-track.ui-body-a .ui-btn-active{background-color: #d3edfe;color: #000000;border-color: #d3edfe;}
+.ui-page-theme-a .ui-btn:hover, html .ui-bar-a .ui-btn:hover, html .ui-body-a .ui-btn:hover, html body .ui-group-theme-a .ui-btn:hover, html head+body .ui-btn.ui-btn-a:hover{background-color: #dddddd;}
+.ui-page-theme-a .ui-btn, html .ui-bar-a .ui-btn, html .ui-body-a .ui-btn, html body .ui-group-theme-a .ui-btn, html head+body .ui-btn.ui-btn-a, .ui-page-theme-a .ui-btn:visited, html .ui-bar-a .ui-btn:visited, html .ui-body-a .ui-btn:visited, html body .ui-group-theme-a .ui-btn:visited, html head+body .ui-btn.ui-btn-a:visited{background-color: #999999;}
+.ui-page-theme-a .ui-btn.ui-btn-active, html .ui-bar-a .ui-btn.ui-btn-active, html .ui-body-a .ui-btn.ui-btn-active, html body .ui-group-theme-a .ui-btn.ui-btn-active, html head+body .ui-btn.ui-btn-a.ui-btn-active, .ui-page-theme-a .ui-checkbox-on:after, html .ui-bar-a .ui-checkbox-on:after, html .ui-body-a .ui-checkbox-on:after, html body .ui-group-theme-a .ui-checkbox-on:after, .ui-btn.ui-checkbox-on.ui-btn-a:after, .ui-page-theme-a .ui-flipswitch-active, html .ui-bar-a .ui-flipswitch-active, html .ui-body-a .ui-flipswitch-active, html body .ui-group-theme-a .ui-flipswitch-active, html body .ui-flipswitch.ui-bar-a.ui-flipswitch-active, .ui-page-theme-a .ui-slider-track .ui-btn-active, html .ui-bar-a .ui-slider-track .ui-btn-active, html .ui-body-a .ui-slider-track .ui-btn-active, html body .ui-group-theme-a .ui-slider-track .ui-btn-active, html body div.ui-slider-track.ui-body-a .ui-btn-active{background-color: #dddddd;color: #000000;border-color: #d3edfe;}
 </style>
 </head>
 <body>
 
-<div style="background:#ECF6FD" data-role="page">
+<div style="background:#ffffff" data-role="page">
 {% if qrcode%}
-  <div data-position="fixed" data-role="header" style="background:#b5e2ff;">
+  <div data-position="fixed" data-role="header" style="background:#333333;color:#ffffff;">
     <h1 style="text-shadow: 0 0px 0 #f3f3f3;">"防伪号"防伪中心</h1>
     <div data-role="navbar">  
         <ul>  
-            <li><a style="text-shadow: 0 0px 0 #f3f3f3;" onClick="chane('one')" class="ui-btn-active ui-state-persist" data-ajax="false">扫描结果</a></li>  
+            <li><a style="text-shadow: 0 0px 0 #f3f3f3;" onClick="chane('one')" class="ui-btn-active ui-state-persist" data-ajax="false">防伪鉴定</a></li>  
             <!--<li><a onClick="chane('two')" data-ajax="false">产品信息</a></li>  --> 
             <li><a style="text-shadow: 0 0px 0 #f3f3f3;" onClick="chane('three')" data-ajax="true">溯源信息</a></li>  
-            <!--<li><a onClick="chane('fo')" data-ajax="true">商家推荐</a></li>    --> 
+            <li><a style="text-shadow: 0 0px 0 #f3f3f3;" onClick="chane('fo')">产品详情</a></li>
         </ul>  
     </div><!-- /navbar -->  
   </div>
   
   <div id="one" class="ui-body-d ui-content">
-		<div class="ui-listview ui-listview-inset ui-corner-all ui-shadow" style="float:left;color:red;font-size:26px;background:#ffffff;width:100%;margin-bottom:0px;" class="ui-li-static ui-body-a">
-			<div style="left:10px;margin-left:10px;margin-bottom:10px;margin-right:10px;margin-top:10px;">您查询的是《{{corp.fcorpName}}》的注册产品</b>
-			</div>
-        </div>
-    	<div style="margin-top:0px;" class=" ui-page-theme-a" role="main" data-theme="a" data-form="ui-page-theme-a">
-            <ul class="ui-listview ui-listview-inset ui-corner-all ui-shadow" data-inset="true" data-role="listview">
-                <li class="ui-li-static ui-body-a" data-theme="a" data-swatch="a" data-form="ui-body-a"><span style="float:left;">标签编号</span><span style="float:left;font-weight:bold;">{{qrcode.fqrcode}}</span></li>
+		<div style="width:100% ;text-align:center; color:#2db200;font-size:26px;margin-top:20px;margin-bottom:20px;"><b>防伪查询成功</b></div>
+        
+        <div style="width:100%;background:#333333;text-shadow: 0 0px 0 #f3f3f3;color:#ffffff;height:25px;line-height:25px;">&nbsp;&nbsp;防伪信息</div>
+            
+    	<div style="margin-left:10px;margin-right:10px;line-height:30px;" >
+                <div >
+                	标签编号:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>{{qrcode.fqrcode}}</b>
+                </div>
                 <!-- <li class="ui-li-static ui-body-a" data-theme="a" data-swatch="a" data-form="ui-body-a"><span style="float:left;">二维码生成时间</span><span style="float:right;font-weight: bold;"></span></li> -->
-                {% if qrcode.fvolumeNo%}<li class="ui-li-static ui-body-a" data-theme="a" data-swatch="a" data-form="ui-body-a"><span style="float:left;">卷标号</span><span style="float:left;font-weight: bold;">{{qrcode.fvolumeNo}}
-                </span></li>
+                {% if qrcode.fvolumeNo%}
+                <div >
+                	卷标号:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>{{qrcode.fvolumeNo}}</b>
+                </div>
                 {% endif %}
-                {% if qrcode.fisBan%}<li class="ui-li-static ui-body-a" data-theme="a" data-swatch="a" data-form="ui-body-a"><span style="float:left;">是否冻结</span><span style="float:left;font-weight: bold;">{% if qrcode.fisBan == False %}否
-                {% else %}是
-                {% endif %}</span></li>
+                {% if qrcode.fisBan%}
+                <div >
+                	是否冻结:&nbsp;&nbsp;&nbsp;<b>{% if qrcode.fisBan == False %}否{% else %}是{% endif %}</b>
+                </div>
                 {% endif %}
                 <!-- <li class="ui-li-static ui-body-a" data-theme="a" data-swatch="a" data-form="ui-body-a"></li>
                 <li class="ui-li-static ui-body-a" data-theme="a" data-swatch="a" data-form="ui-body-a"></li>
                 <li class="ui-li-static ui-body-a" data-theme="a" data-swatch="a" data-form="ui-body-a"></li> -->
-            </ul>
         </div>
-        <p></p>
-        <div class=" ui-page-theme-a" role="main" data-theme="a" data-form="ui-page-theme-a">
-            <ul class="ui-listview ui-listview-inset ui-corner-all ui-shadow" data-inset="true" data-role="listview">
-                <li class="ui-li-static ui-body-a" data-theme="a" data-swatch="a" data-form="ui-body-a"><span style="float:left;">查询次数</span><span style="float:right;font-weight: bold;">{{qrcode.fremark1}}</span></li>
+        
+        <div style="margin-left:10px;margin-right:10px;line-height:30px;">
+                <div >
+                	查询次数:&nbsp;&nbsp;&nbsp;<b>{{qrcode.fremark1}}</b>
+                </div>
                 <!-- <li class="ui-li-static ui-body-a" data-theme="a" data-swatch="a" data-form="ui-body-a"><span style="float:left;">上次查询地点</span><span style="float:right;font-weight: bold;">{{qrcode.fremark2}}</span></li> -->
-                <li class="ui-li-static ui-body-a" data-theme="a" data-swatch="a" data-form="ui-body-a"><span style="float:left;">本次查询时间</span><span style="float:right;font-weight: bold;">{{qrcode.fremark3|date:"Y-m-d H:i:s"}}</span></li>
+                <div >
+                	本次查询时间:<b>{{qrcode.fremark3|date:"Y-m-d H:i:s"}}</b>
+                </div>
 <!--<li class="ui-li-static ui-body-a" data-theme="a" data-swatch="a" data-form="ui-body-a"><span style="float:left;">本次查询时间</span><span style="float:right;font-weight: bold;">{{rightnow|date:"Y-m-d H:i:s"}}</span></li>-->
-            </ul>
+			<div style="margin-bottom:10px;">产品图片：</div>
+  			<img style="width:100%" src="http://114.215.130.186/{{product.fsmallPicUrl}}">
         </div>
-  	<img style="width:100%" src="http://114.215.130.186/{{product.fsmallPicUrl}}">
   </div>
 
 	<div id="three" class="ui-body-d ui-content">
-        <div>
-            <div data-inset="true" data-role="listview" style="background:#FFF;height:auto;border-top:1px solid #cdcdcd;">
-                {% if product %}
-            	<div style="margin-left:15px;margin-right:15px;font-size:16px;line-height:50px;border-top:1px solid #cdcdcd;">
-                产品名:<b style="float:right;">{{product.fproductName}}</b><br>
-            	</div>
-                    {% if params %}
-                        {% for k,v in params.items %}
-            	<div style="margin-left:15px;margin-right:15px;font-size:16px;line-height:50px;border-top:1px solid #cdcdcd;">
-                {{k}}:<b style="float:right;">{{v}}</b><br>
-            	</div>
-                        {% endfor %}
-                    {% endif %}
-                    {% if product.fisoNo%}
-            	<div style="margin-left:15px;margin-right:15px;font-size:16px;line-height:50px;border-top:1px solid #cdcdcd;">
-                产品国家授权编号:<b style="float:right;">{{product.fisoNo}}</b><br>
-            	</div>
-                    {% endif %}
-                    {% if qrcode.fdate%}
-            	<div style="margin-left:15px;margin-right:15px;font-size:16px;line-height:50px;border-top:1px solid #cdcdcd;">
-                生产日期:<b style="float:right;">{{qrcode.fdate}}</b><br>
-            	</div>
-                    {% endif %}
-                {% else %}
-                <li class="ui-li-static ui-body-a" data-theme="a" data-swatch="a" data-form="ui-body-a"><b>暂无产品信息</b></li>
-                {% endif %}
-            </div>
-        </div>
-        <p></p>
+    
+        <div style="width:100%;background:#333333;text-shadow: 0 0px 0 #f3f3f3;color:#ffffff;height:25px;line-height:25px;">&nbsp;&nbsp;公司信息</div>
+        
         <div>
             <div data-inset="true" data-role="listview" style="background:#FFF;height:auto;border-top:1px solid #cdcdcd;">
             {% if corp%}
-            	<div style="margin-left:15px;margin-right:15px;font-size:16px;line-height:50px;border-top:1px solid #cdcdcd;">
-                {% if corp.fcorpName%}生产企业:<b style="float:right;">{{corp.fcorpName}}</b><br>
-            	</div>
+                {% if corp.fcorpName%}
+                    <div style="margin-left:15px;margin-right:15px;font-size:16px;line-height:30px;border-top:1px solid #cdcdcd;">
+                        生产企业:&nbsp;&nbsp;<b>{{corp.fcorpName}}</b><br>
+                    </div>
                 {% endif %}
-            	<div style="margin-left:15px;margin-right:15px;font-size:16px;line-height:50px;border-top:1px solid #cdcdcd;">
-                {% if corp.faddress%}公司地址:<b style="float:right;">{{corp.faddress}}</b><br>
-            	</div>
+                {% if corp.faddress%}
+                    <div style="margin-left:15px;margin-right:15px;font-size:16px;line-height:30px;border-top:1px solid #cdcdcd;">
+                        公司地址&nbsp;&nbsp;:<b>{{corp.faddress}}</b><br>
+                    </div>
                 {% endif %}
-            	<div style="margin-left:15px;margin-right:15pxfont-size:16px;line-height:50px;border-top:1px solid #cdcdcd;">
-                {% if corp.fcontact%}联系方式:<b style="float:right;">{{corp.fcontact}}</b><br>
-            	</div>
+                {% if corp.fcontact%}
+                    <div style="margin-left:15px;margin-right:15pxfont-size:16px;line-height:30px;border-top:1px solid #cdcdcd;">
+                        联系方式:&nbsp;&nbsp;<b>{{corp.fcontact}}</b><br>
+                    </div>
                 {% endif %}
-            	<div style="margin-left:15px;margin-right:15px;font-size:16px;line-height:50px;border-top:1px solid #cdcdcd;">
-                {% if corp.fchargeMan%}负责人:<b style="float:right;">{{corp.fchargeMan}}</b><br>
-            	</div>
+                {% if corp.fchargeMan%}
+                    <div style="margin-left:15px;margin-right:15px;font-size:16px;line-height:30px;border-top:1px solid #cdcdcd;">
+                        负责人:&nbsp;&nbsp;&nbsp;&nbsp;<b>{{corp.fchargeMan}}</b><br>
+                    </div>
                 {% endif %}
                 <!-- <li class="ui-li-static ui-body-a" data-theme="a" data-swatch="a" data-form="ui-body-a"><span style="float:left;">负责人照片</span><span style="float:right;font-weight: bold;"><img style="width:100px;height: 100px" src="http://114.215.130.186/{{corp.fmanPicUrl}}"></span></li>
                 <li class="ui-li-static ui-body-a" data-theme="a" data-swatch="a" data-form="ui-body-a"><span style="float:left;">公司营业执照</span><span style="float:right;font-weight: bold;"><img style="width:100px;height: 100px" src="http://114.215.130.186/{{corp.fcorpPicUrl}}"></span></li>
@@ -119,8 +103,42 @@
             </div>
         </div>
 
-        <img style="width:100%" src="http://114.215.130.186/{{product.fsmallPicUrl}}">
+		
       </div>
+	<div id="fo" class="ui-body-d ui-content">
+    	
+        <div style="width:100%;background:#333333;text-shadow: 0 0px 0 #f3f3f3;color:#ffffff;height:25px;line-height:25px;">&nbsp;&nbsp;产品信息</div>
+        
+        <div style="margin-top:10px;" >
+                {% if product %}
+                    <div style="margin-left:10px;margin-right:10px;line-height:30px;">
+                    	产品名:&nbsp;&nbsp;&nbsp;&nbsp;<b>{{product.fproductName}}</b><br>
+                    </div>
+                    {% if params %}
+                        {% for k,v in params.items %}
+                            <div style="margin-left:10px;margin-right:10px;line-height:30px;">
+                            	{{k}}:&nbsp;&nbsp;<b>{{v}}</b><br>
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+                    {% if product.fisoNo%}
+                        <div style="margin-left:10px;margin-right:10px;line-height:30px;">
+                        	产品国家授权编号:<b>{{product.fisoNo}}</b><br>
+                        </div>
+                    {% endif %}
+                    {% if qrcode.fdate%}
+                        <div style="margin-left:10px;margin-right:10px;line-height:30px;">
+                        	生产日期:&nbsp;&nbsp;<b>{{qrcode.fdate}}</b><br>
+                        </div>
+                    {% endif %}
+                {% else %}
+                	<li class="ui-li-static ui-body-a" data-theme="a" data-swatch="a" data-form="ui-body-a"><b>暂无产品信息</b></li>
+                {% endif %}
+        </div>
+        <p></p>
+
+        <img style="width:100%" src="http://114.215.130.186/{{product.fsmallPicUrl}}">
+    </div>
 {% else %}
 
         <div class="ui-corner-all custom-corners">
@@ -129,19 +147,25 @@
 
           </div>
         </div>
-{% endif %}</div>
+{% endif %}<!-- </div> -->
 		{% if product %}
         <div data-position="fixed" data-role="footer">
             <div class="ui-navbar" data-role="navbar" role="navigation">
                 <ul class="ui-grid-b">
                     <li class="ui-block-a">
-                    <a style="background:#b5e2ff;text-shadow: 0 0px 0 #f3f3f3;" target="_blank" href="{{product.fshopUrl}}">商城首页</a>
+                    <a style="background:#333333;text-shadow: 0 0px 0 #f3f3f3;" class="ui-btn" href="{{product.fmanualUrl}}">
+                    	<img height="35px" src="/static/img/001.png" alt="店铺首页">
+                    </a>
                     </li>
                     <li class="ui-block-b">
-                    <a style="background:#b5e2ff;text-shadow: 0 0px 0 #f3f3f3;" target="_blank" href="{{product.fbuyUrl}}">再次购买</a>
+                    <a style="background:#333333;text-shadow: 0 0px 0 #f3f3f3;" target="_blank" href="{{product.fbuyUrl}}">
+                    	<img height="35px" src="/static/img/002.png" alt="再次购买">
+                    </a>
                     </li>
                     <li class="ui-block-c">
-                    <a style="background:#b5e2ff;text-shadow: 0 0px 0 #f3f3f3;" class="ui-btn" href="{{product.fmanualUrl}}">产品介绍</a>
+                    <a style="background:#333333;text-shadow: 0 0px 0 #f3f3f3;" target="_blank" href="{{product.fshopUrl}}">
+                    	<img height="35px" src="/static/img/003.png" alt="商城首页">
+                    </a>
                     </li>
                 </ul>
             </div>
